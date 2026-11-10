@@ -1,4 +1,4 @@
-﻿
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
@@ -245,7 +245,7 @@ void upisiUDatoteku(Osoba* glava) {
 void ucitajIzDatoteke(Osoba** glava) {
     FILE* datoteka = fopen("osobe.txt", "r");
     Osoba* nova;
-    Osoba* zadnji = NULL;
+    Osoba* zadnji = *glava;
     char ime[50];
     char prezime[50];
     int godina;
@@ -254,6 +254,10 @@ void ucitajIzDatoteke(Osoba** glava) {
     if (datoteka == NULL) {
         printf("Greska pri otvaranju datoteke osobe.txt.\n");
         return;
+    }
+
+    while (zadnji != NULL && zadnji->sljedeci != NULL) {
+        zadnji = zadnji->sljedeci;
     }
 
     while (1) {
